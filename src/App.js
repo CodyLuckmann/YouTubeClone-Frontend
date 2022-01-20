@@ -4,6 +4,7 @@ import LoginForm from './Components/LoginForm/LoginForm';
 import VideoPlayer from './Components/VideoPlayer/VideoPlayer';
 import { googleAPIKey } from "./Keys";
 import axios from 'axios';
+import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<VideoPlayer someVideo={videoId} />}/>
           <Route path="/Login" element={<LoginForm />}/>
+          <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
       </Router>
     </div>
