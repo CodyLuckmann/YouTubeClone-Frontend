@@ -1,6 +1,7 @@
+import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
 
-function NavBar() {
+function NavBar({user}) {
 
     function logout() {
         localStorage.removeItem('token');
@@ -8,20 +9,30 @@ function NavBar() {
     }
 
     return( 
-    <nav>
-        <ul>
-            <Link to='/'>
-                <li>Home</li>
-            </Link>
-            <Link to='/register'>
-                <li>Register</li>
-            </Link>
-            <Link to='/Login'>
-                <li>Login</li>
-            </Link>
-            < button onClick={logout}>Log Out</button>
-        </ul>
-    </nav>
+        <div>
+            {user && <h4>Welcome {user.username}</h4>}
+            <ul>
+                <li>
+                    <Link to='/'>Home</Link>
+                </li>
+                {!user &&
+                    <React.Fragment>
+                        <li>
+                            <Link to='/register'>Register</Link>
+                        </li>
+                        <li>
+                            <Link to='/Login'>Login</Link>
+                        </li>
+                    </React.Fragment>
+                }
+                {user &&
+                    <React.Fragment>
+                        <button onClick={logout}>Log Out</button>
+                    </React.Fragment>}
+            </ul>
+            {console.log(user)}
+        </div>
+        
     );
 };
 
