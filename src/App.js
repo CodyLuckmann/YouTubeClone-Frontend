@@ -7,6 +7,7 @@ import axios from 'axios';
 import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
 import RelatedVideos from './Components/RelatedVideos/RelatedVideos';
 import NavBar from './Components/NavBar/NavBar';
+import jwt_decode from 'jwt-decode';
 
 
 function App() {
@@ -17,11 +18,18 @@ function App() {
   const [description, setDescription] = useState()
 
   
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     getVideo();
     getRelatedVideos();
     getTitleDescription();
+    const jwt = localStorage.getItem('token');
+        try{
+            const decodedUser =jwt_decode(jwt);
+            setUser(decodedUser);
+
+        } catch {}
   }, [])
   
   async function getTitleDescription() {
