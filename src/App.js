@@ -35,8 +35,8 @@ function App() {
   console.log('video', video)
   return (
     <div>
-      <NavBar/>
       <Router>
+        <NavBar/>
         <Routes>
           <Route path="/" element={<VideoPlayer someVideo={videoId} />}/>
           <Route path="/Login" element={<LoginForm />}/>
