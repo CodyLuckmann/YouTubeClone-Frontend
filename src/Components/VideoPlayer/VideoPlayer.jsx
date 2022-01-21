@@ -6,7 +6,7 @@ const VideoPlayer = (props) => {
     const [description, setDescription] = useState()
 
     useEffect(() => {
-        getTitleDescription;
+        getTitleDescription();
       }, [])
 
     async function getTitleDescription() {
