@@ -5,7 +5,7 @@ import axios from 'axios';
 const RegistrationForm = (props) => {
 
 // States for registraion
-const [user_name, setUserName] = useState('');
+const [username, setUserName] = useState('');
 const [first_name, setFirstName] = useState('');
 const [last_name, setLastName] = useState('');
 const [email, setEmail] = useState('');
@@ -46,27 +46,37 @@ const handlePassword = (e) => {
 };
 
 // Handle form submission
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    if (user_name === '' || first_name === '' || last_name === '' || email === '' || password === '') {
-        setError(true);
-    } else {
-        let response = await axios.post('http://127.0.0.1:8000/api/auth/register/');
-        console.log(response)
-        setSubmitted(true);
-        setError(false);
-    }
+    // if (user_name === '' || first_name === '' || last_name === '' || email === '' || password === '') {
+    //     setError(true);
+    // } else {
+    //     let response = await axios.post('http://127.0.0.1:8000/api/auth/register/');
+    //     console.log(response)
+    //     setSubmitted(true);
+    //     setError(false);
+    // }
+    let newUser = 
+        {
+            username: username,
+            password: password,
+            email: email,
+            first_name: first_name,
+            last_name: last_name,
+
+        }
+    let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser);
+    console.log(response);
 }
 
  // Showing success message
  const successMessage = () => {
     return (
       <div
-        className="success"
         style={{
           display: submitted ? '' : 'none',
         }}>
-        <h1>User {user_name} successfully registered!!</h1>
+        <h1>User {username} successfully registered!!</h1>
       </div>
     );
   };
@@ -75,7 +85,6 @@ const handleSubmit = (e) => {
     const errorMessage = () => {
         return (
           <div
-            className="error"
             style={{
               display: error ? '' : 'none',
             }}>
@@ -85,37 +94,37 @@ const handleSubmit = (e) => {
       };
      
       return (
-        <div className="form">
+        <div>
           <div>
             <h1>User Registration</h1>
           </div>
      
           {/* Calling to the methods */}
-          <div className="messages">
+          <div> 
             {errorMessage()}
             {successMessage()}
           </div>
      
           <form>
             {/* Labels and inputs for form data */}
-            <label className="label">User Name</label>
-            <input onChange={handleUserName} className="input"
-              value={user_name} type="text" />
+            <label>User Name</label>
+            <input onChange={handleUserName} 
+              value={username} type="text" />
 
-            <label className="label">First Name</label>
-            <input onChange={handleFirstName} className="input"
+            <label>First Name</label>
+            <input onChange={handleFirstName} 
                 value={first_name} type='text'/>
 
-            <label className="label">Last Name</label>
-            <input onChange={handleLastName} className="input"
+            <label>Last Name</label>
+            <input onChange={handleLastName} 
                 value={last_name} type='text'/>
      
-            <label className="label">Email</label>
-            <input onChange={handleEmail} className="input"
+            <label>Email</label>
+            <input onChange={handleEmail} 
               value={email} type="email" />
      
-            <label className="label">Password</label>
-            <input onChange={handlePassword} className="input"
+            <label>Password</label>
+            <input onChange={handlePassword} 
               value={password} type="password" />
      
             <button onClick={handleSubmit} className="btn" type="submit">
