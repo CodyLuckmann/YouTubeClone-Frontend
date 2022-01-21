@@ -1,15 +1,51 @@
+import axios from 'axios';
 import  { React, useState } from 'react';
 
 const LoginForm = (props) => {
-    return ( 
-        <div>
-            <form>
-                <div><label> Username <input type="text" name="name" /></label></div>
-                <div><label> Password <input type="password" name="password" /></label></div> 
-                <button type="submit"> Login </button>  
-            </form>
-        </div>
-     );
+    
+const [username, setUserName] = useState('');
+const [password, setPassword] = useState('');
+
+const handleUserName = (e) => {
+    setUserName(e.target.value);
+};
+
+const handlePassword = (e) => {
+    setPassword(e.target.value)
+};
+
+const handleSubmit = async (e) => {
+    e.preventDefault();
+    let login =
+        {
+            username: username,
+            password: password,
+        }
+    let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', login);
+    console.log(response);
+    };
+
+    return (
+       <div>
+         <div>
+             <h1>Login</h1>
+         </div>
+         <form>
+             <label>Username</label>
+             <input onChange={handleUserName}
+             value={username} type='text' />
+
+             <label>Password</label>
+             <input onChange={handlePassword}
+             value={password} type='password' />
+
+             <button onClick={handleSubmit} type='submit'>
+                 Submit
+             </button>
+         </form>
+       </div>
+    );
+
 }
  
 export default LoginForm;
