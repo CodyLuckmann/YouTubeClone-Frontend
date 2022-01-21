@@ -1,7 +1,10 @@
 import axios from 'axios';
-import  { React, useState } from 'react';
+import  { React, useEffect, useState } from 'react';
+
 
 const LoginForm = (props) => {
+
+    
     
 const [username, setUserName] = useState('');
 const [password, setPassword] = useState('');
@@ -23,6 +26,8 @@ const handleSubmit = async (e) => {
         }
     let response = await axios.post('http://127.0.0.1:8000/api/auth/login/', login);
     console.log(response);
+    localStorage.setItem('token', response.data.access);
+    window.location = '/'
     };
 
     return (
