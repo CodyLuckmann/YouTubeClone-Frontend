@@ -46,19 +46,6 @@ const handlePassword = (e) => {
 };
 
 // Handle form submission
-<<<<<<< HEAD
-const handleSubmit = (e) => { 
-    let response = axios.post('http://127.0.0.1:8000/api/auth/register/');
-        console.log(response)
-    e.preventDefault();
-    if (user_name === '' || first_name === '' || last_name === '' || email === '' || password === '') {
-        setError(true);
-    } else {
-       
-        setSubmitted(true);
-        setError(false);
-    }
-=======
 const handleSubmit = async (e) => {
     e.preventDefault();
     // if (user_name === '' || first_name === '' || last_name === '' || email === '' || password === '') {
@@ -80,7 +67,6 @@ const handleSubmit = async (e) => {
         }
     let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser);
     console.log(response);
->>>>>>> 9ad9b020cdad442639eaf8e3b7df9012871b632e
 }
 
  // Showing success message
