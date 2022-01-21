@@ -10,7 +10,7 @@ function NavBar({user}) {
 
     return( 
         <div>
-            {user && <h4>Welcome {user.username}</h4>}
+            {user && <h2>Welcome to YouTube Clone</h2>}
             <ul>
                 <li>
                     <Link to='/'>Home</Link>
