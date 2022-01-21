@@ -54,7 +54,7 @@ function App() {
   return (
     <div>
       <Router>
-        <NavBar/>
+        <NavBar user={user}/>
         <Routes>
           <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
