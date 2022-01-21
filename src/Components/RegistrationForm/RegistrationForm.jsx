@@ -46,13 +46,14 @@ const handlePassword = (e) => {
 };
 
 // Handle form submission
-const handleSubmit = (e) => {
+const handleSubmit = (e) => { 
+    let response = axios.post('http://127.0.0.1:8000/api/auth/register/');
+        console.log(response)
     e.preventDefault();
     if (user_name === '' || first_name === '' || last_name === '' || email === '' || password === '') {
         setError(true);
     } else {
-        let response = await axios.post('http://127.0.0.1:8000/api/auth/register/');
-        console.log(response)
+       
         setSubmitted(true);
         setError(false);
     }
