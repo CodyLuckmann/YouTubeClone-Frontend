@@ -6,6 +6,7 @@ import { googleAPIKey } from "./Keys";
 import axios from 'axios';
 import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
 import RelatedVideos from './Components/RelatedVideos/RelatedVideos';
+import NavBar from './Components/NavBar/NavBar';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
   console.log('video', video)
   return (
     <div>
+      <NavBar/>
       <Router>
         <Routes>
           <Route path="/" element={<VideoPlayer someVideo={videoId} />}/>
