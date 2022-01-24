@@ -8,14 +8,16 @@ import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
 import RelatedVideos from './Components/RelatedVideos/RelatedVideos';
 import NavBar from './Components/NavBar/NavBar';
 import jwt_decode from 'jwt-decode';
+import SearchBar from './Components/SearchBar/SearchBar';
 
 
 function App() {
 
   const [video, setVideo] = useState([])
-  const [videoId, setVideoId] = useState(["Z83I2tz5UzM", "aS8L0hLOo4o", "YuhXi0aByn8", "BbUWsQ48T58"])
-  const [title, setTitle] = useState()
-  const [description, setDescription] = useState()
+  const [videoId, setVideoId] = useState(["Z83I2tz5UzM"])
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [vidSearch, setVidSearch] = useState([])
 
   
   const [user, setUser] = useState(null);
@@ -31,6 +33,14 @@ function App() {
 
         } catch {}
   }, [])
+
+  const filterVideos = async (searchTerm) => {
+    console.log(searchTerm);
+    let matchingVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${googleAPIKey}&part=snippet`)   
+    // setVideo(matchingVideo.data.items)
+    setVidSearch(matchingVideo.data.items)
+    
+  };
   
   async function getTitleDescription() {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}}&key=${googleAPIKey}&part=snippet`)
@@ -55,8 +65,9 @@ function App() {
     <div>
       <Router>
         <NavBar user={user}/>
+        <SearchBar filterVideos={filterVideos} />
         <Routes>
-          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description}/>}/>
+          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description} searchResults = {vidSearch}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
           <Route path="/Related" element={<RelatedVideos  video={video}/>}/>
