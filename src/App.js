@@ -67,7 +67,7 @@ function App() {
         <NavBar user={user}/>
         <SearchBar filterVideos={filterVideos} />
         <Routes>
-          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description} searchResults = {vidSearch}/>}/>
+          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description} searchResults = {vidSearch}   />}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
           <Route path="/Related" element={<RelatedVideos  video={video}/>}/>
