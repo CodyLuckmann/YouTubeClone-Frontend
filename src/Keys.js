@@ -1,1 +1,1 @@
-export const googleAPIKey = "AIzaSyAqW4EBZKeV2azCDE-vV4ImUZaYWSIAeio"
+export const googleAPIKey = "AIzaSyChCscAbhjYh0um37_wjO0OTEkoMUruYow"

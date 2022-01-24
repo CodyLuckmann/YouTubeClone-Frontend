@@ -60,6 +60,12 @@ function App() {
     console.log(response.data.items)
   }
   console.log('video', video)
+
+  async function searchResult(id) {
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${id}}&key=${googleAPIKey}&part=snippet`)
+    setVideo(response.data.items)
+    console.log(response.data.items)
+  }
   
   return (
     <div>
@@ -67,7 +73,7 @@ function App() {
         <NavBar user={user}/>
         <SearchBar filterVideos={filterVideos} />
         <Routes>
-          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description} searchResults = {vidSearch}   />}/>
+          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description} searchResults = {vidSearch} redirect = {searchResult}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
           <Route path="/Related" element={<RelatedVideos  video={video}/>}/>
