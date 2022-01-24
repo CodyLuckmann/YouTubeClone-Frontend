@@ -14,7 +14,7 @@ import SearchBar from './Components/SearchBar/SearchBar';
 function App() {
 
   const [video, setVideo] = useState([])
-  const [videoId, setVideoId] = useState(["Z83I2tz5UzM"])
+  const [videoId, setVideoId] = useState("Z83I2tz5UzM")
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [vidSearch, setVidSearch] = useState([])
@@ -37,13 +37,12 @@ function App() {
   const filterVideos = async (searchTerm) => {
     console.log(searchTerm);
     let matchingVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${googleAPIKey}&part=snippet`)   
-    // setVideo(matchingVideo.data.items)
     setVidSearch(matchingVideo.data.items)
     
   };
   
   async function getTitleDescription() {
-      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}}&key=${googleAPIKey}&part=snippet`)
+      let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}&key=${googleAPIKey}&part=snippet`)
       setTitle(response.data.items[0].snippet.title)
       setDescription(response.data.items[0].snippet.description)
   }
@@ -55,14 +54,14 @@ function App() {
   }
 
   async function getVideo() {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}}&key=${googleAPIKey}&part=snippet`)
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}&key=${googleAPIKey}&part=snippet`)
     setVideo(response.data.items)
     console.log(response.data.items)
   }
   console.log('video', video)
 
   async function searchResult(id) {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${id}}&key=${googleAPIKey}&part=snippet`)
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${id}&key=${googleAPIKey}&part=snippet`)
     setVideo(response.data.items)
     console.log(response.data.items)
   }
@@ -73,7 +72,7 @@ function App() {
         <NavBar user={user}/>
         <SearchBar filterVideos={filterVideos} />
         <Routes>
-          <Route path="/" element={<VideoPlayer someVideo={videoId} title={title} description={description} searchResults = {vidSearch} redirect = {searchResult}/>}/>
+          <Route path="/" element={<VideoPlayer setVideoId={setVideoId} someVideo={videoId} title={title} description={description} searchResults = {vidSearch}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
           <Route path="/Related" element={<RelatedVideos  video={video}/>}/>
