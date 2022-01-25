@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { googleAPIKey } from '../../Keys';
+import { googleAPIKey } from '../../NewKeys';
 
 const VideoPlayer = (props) => {
 
