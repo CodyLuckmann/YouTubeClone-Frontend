@@ -45,8 +45,8 @@ function App() {
   
   async function getTitleDescription() {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}&key=${googleAPIKey}&part=snippet`)
-      setTitle(response.data.items.snippet.title)
-      setDescription(response.data.items.snippet.description)
+      setTitle(response.data.items[0].snippet.title)
+      setDescription(response.data.items[0].snippet.description)
   }
 
   async function getRelatedVideos() {
