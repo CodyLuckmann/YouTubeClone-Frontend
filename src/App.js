@@ -37,7 +37,7 @@ function App() {
 
   const filterVideos = async (searchTerm) => {
     console.log(searchTerm);
-    let matchingVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchTerm}&key=${googleAPIKey}`)   
+    let matchingVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchTerm}&key=${googleAPIKey}`)   
     setVidSearch(matchingVideo.data.items)
     console.log('Hello', matchingVideo.data)
     
@@ -45,8 +45,8 @@ function App() {
   
   async function getTitleDescription() {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}&key=${googleAPIKey}&part=snippet`)
-      setTitle(response.data.items[0].snippet.title)
-      setDescription(response.data.items[0].snippet.description)
+      setTitle(response.data.items.snippet.title)
+      setDescription(response.data.items.snippet.description)
   }
 
   async function getRelatedVideos() {
@@ -68,6 +68,20 @@ function App() {
     console.log(response.data.items)
   }
   
+  // async function accountCreation(object) {
+  //   let newUser = 
+  //       {
+  //           username: object.username,
+  //           password: object.password,
+  //           email: object.email,
+  //           first_name: object.first_name,
+  //           last_name: object.last_name,
+
+  //       }
+  //   let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser);
+  //   console.log(response.data)
+  // }
+
   return (
     <div>
       <Router>
