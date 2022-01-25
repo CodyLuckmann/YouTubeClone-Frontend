@@ -11,6 +11,7 @@ const [last_name, setLastName] = useState('');
 const [email, setEmail] = useState('');
 const [password, setPassword] = useState('');
 
+// let object = {...username,...first_name,...last_name,...email,...password}
 // States for handling errors
 const [submitted, setSubmitted] = useState(false);
 const [error, setError] = useState(false);
@@ -47,6 +48,7 @@ const handlePassword = (e) => {
 
 // Handle form submission
 const handleSubmit = async (e) => {
+  debugger
     e.preventDefault();
     // if (user_name === '' || first_name === '' || last_name === '' || email === '' || password === '') {
     //     setError(true);
@@ -68,6 +70,7 @@ const handleSubmit = async (e) => {
     let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser);
     console.log(response);
     window.location = '/Login'
+    // props.create(object)
 }
 
  // Showing success message
