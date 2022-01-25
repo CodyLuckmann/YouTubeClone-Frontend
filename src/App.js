@@ -75,7 +75,7 @@ function App() {
           <Route path="/" element={<VideoPlayer setVideoId={setVideoId} someVideo={videoId} title={title} description={description} searchResults = {vidSearch}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
-          <Route path="/Related" element={<RelatedVideos  video={video}/>}/>
+          <Route path="/Related" element={<RelatedVideos  getRelatedVideos={getRelatedVideos}/>}/>
         </Routes>
       </Router>
     </div>
