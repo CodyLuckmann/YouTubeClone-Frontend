@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import LoginForm from './Components/LoginForm/LoginForm';
 import VideoPlayer from './Components/VideoPlayer/VideoPlayer';
-import { googleAPIKey } from "./Keys";
+import { googleAPIKey } from "./NewKeys";
 import axios from 'axios';
 import RegistrationForm from './Components/RegistrationForm/RegistrationForm';
 import RelatedVideos from './Components/RelatedVideos/RelatedVideos';
@@ -18,6 +18,7 @@ function App() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [vidSearch, setVidSearch] = useState([])
+  const [relatedVids, setRelatedVids] = useState([])
 
   
   const [user, setUser] = useState(null);
@@ -32,7 +33,7 @@ function App() {
             setUser(decodedUser);
 
         } catch {}
-  }, [])
+  }, [videoId])
 
   const filterVideos = async (searchTerm) => {
     console.log(searchTerm);
@@ -51,7 +52,7 @@ function App() {
   async function getRelatedVideos() {
     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${videoId}&type=video&key=${googleAPIKey}&part=snippet`)
     console.log('poo', response.data)
-    setVideo(response.data.items)
+    setRelatedVids(response.data.items)
   }
 
   async function getVideo() {
@@ -86,11 +87,11 @@ function App() {
       <Router>
         <NavBar user={user}/>
         <SearchBar filterVideos={filterVideos} />
+        <RelatedVideos setVideoId={setVideoId} relatedVids={relatedVids} />
         <Routes>
           <Route path="/" element={<VideoPlayer setVideoId={setVideoId} someVideo={videoId} title={title} description={description} searchResults = {vidSearch}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
-          <Route path="/Related" element={<RelatedVideos  getRelatedVideos={getRelatedVideos} />}/>
         </Routes>
       </Router>
     </div>
