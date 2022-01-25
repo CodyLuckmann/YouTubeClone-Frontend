@@ -14,7 +14,7 @@ import SearchBar from './Components/SearchBar/SearchBar';
 function App() {
 
   const [video, setVideo] = useState([])
-  const [videoId, setVideoId] = useState("Z83I2tz5UzM")
+  const [videoId, setVideoId] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [vidSearch, setVidSearch] = useState([])
@@ -36,8 +36,9 @@ function App() {
 
   const filterVideos = async (searchTerm) => {
     console.log(searchTerm);
-    let matchingVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&key=${googleAPIKey}&part=snippet`)   
+    let matchingVideo = await axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchTerm}&key=${googleAPIKey}`)   
     setVidSearch(matchingVideo.data.items)
+    console.log('Hello', matchingVideo.data)
     
   };
   
@@ -58,7 +59,7 @@ function App() {
     setVideo(response.data.items)
     console.log(response.data.items)
   }
-  console.log('video', video)
+  // console.log('video', video)
 
   async function searchResult(id) {
     let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${id}&key=${googleAPIKey}&part=snippet`)
@@ -75,7 +76,7 @@ function App() {
           <Route path="/" element={<VideoPlayer setVideoId={setVideoId} someVideo={videoId} title={title} description={description} searchResults = {vidSearch}/>}/>
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
-          <Route path="/Related" element={<RelatedVideos  getRelatedVideos={getRelatedVideos}/>}/>
+          <Route path="/Related" element={<RelatedVideos  getRelatedVideos={getRelatedVideos} />}/>
         </Routes>
       </Router>
     </div>
