@@ -6,14 +6,9 @@ const CommentForm = (props) => {
 
     const [video_id, setVideoId] = useState('');
     const [text, setText] = useState('');
+    const jwt = localStorage.getItem('token')
 
-    const handleVideo_id = (e) => {
-        setVideoId(e.target.value);
-    };
-
-    const handleText = (e) => {
-        setText(e.target.value);
-    };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,8 +18,18 @@ const CommentForm = (props) => {
                 text: text,
 
             }
-        let response = await axios.post('http://127.0.0.1:8000/api/comments/', comment);
+        let response = await axios.post('http://127.0.0.1:8000/api/comments/', {headers: {Authorization: 'Bearer ' + jwt}}, comment);
+        props.addComment(response);
         
     }
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Comment</label>
+                <input type='text' value={text} onChange={(event) => setText(event.target.value)}/>
+            </div>
+        </form>
+    )
 }
     export default CommentForm
