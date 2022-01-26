@@ -5,7 +5,7 @@ const CommentList = (props) => {
          {props.comment.map((entry) => {
            return (
              <tr> 
-             <td> -  ~ {entry.data.text} ~ </td>
+             <td> {entry.user.username}: {entry.text}  </td>
              </tr>
             );
          })}
