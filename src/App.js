@@ -49,6 +49,11 @@ function App() {
     
   };
   
+  function NewComment(entry){
+    let tempComments = [...entries, entry];
+    setEntries(tempComments)
+  }
+
   async function getTitleDescription() {
       let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${videoId}&key=${googleAPIKey}&part=snippet`)
       setTitle(response.data.items[0].snippet.title)
@@ -93,8 +98,8 @@ function App() {
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
-        <CommentForm video_id={videoId} />
-        <CommentList parentEntries={entries} />
+        <CommentForm video_id={videoId} addComment={NewComment} />
+        <CommentList comment={entries} />
       </Router>
     </div>
   );

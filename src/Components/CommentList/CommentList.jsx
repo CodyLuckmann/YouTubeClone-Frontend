@@ -2,10 +2,10 @@ const CommentList = (props) => {
     return ( 
         <table className="text" className="table">
         <tbody>
-         {props.parentEntries.map((entry) => {
+         {props.comment.map((entry) => {
            return (
              <tr> 
-             <td> -  ~ {entry.comment} ~ </td>
+             <td> -  ~ {entry.data.text} ~ </td>
              </tr>
             );
          })}
