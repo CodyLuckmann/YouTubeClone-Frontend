@@ -10,6 +10,7 @@ import NavBar from './Components/NavBar/NavBar';
 import jwt_decode from 'jwt-decode';
 import SearchBar from './Components/SearchBar/SearchBar';
 import CommentForm from './Components/CommentForm/CommentForm';
+import CommentList from './Components/CommentList/CommentList';
 
 
 function App() {
@@ -20,13 +21,16 @@ function App() {
   const [description, setDescription] = useState('')
   const [vidSearch, setVidSearch] = useState([])
   const [relatedVids, setRelatedVids] = useState([])
-  const [entries, setEntries] = useState([])
+  const [comments, setComments] = useState([])
+  const [entries,  setEntries] = useState([])
+  
 
   
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     getVideo();
+    getComments();
     getRelatedVideos();
     getTitleDescription();
     const jwt = localStorage.getItem('token');
@@ -70,7 +74,11 @@ function App() {
     console.log(response.data.items)
   }
 
- 
+  async function getComments() {
+    let response = await axios.get(`http://127.0.0.1:8000/api/comments/${videoId}`)
+    setComments(response.data)
+    console.log(response.data)
+  }
   
   
 
@@ -86,6 +94,7 @@ function App() {
           <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
         <CommentForm video_id={videoId} />
+        <CommentList parentEntries={entries} />
       </Router>
     </div>
   );

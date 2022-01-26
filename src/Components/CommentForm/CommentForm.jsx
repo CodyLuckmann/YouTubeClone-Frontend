@@ -20,7 +20,7 @@ const CommentForm = (props) => {
             }
         console.log(comment)
         let response = await axios.post('http://127.0.0.1:8000/api/comments/', comment ,{headers: {Authorization: 'Bearer ' + jwt}});
-        props.addComment(response);
+        
         
     }
 
