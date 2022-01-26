@@ -70,25 +70,9 @@ function App() {
     console.log(response.data.items)
   }
 
-  function NewComment(entry) {
-    let tempComments = [...entries, entry];
-
-    setEntries(tempComments)
-  }
+ 
   
-  // async function accountCreation(object) {
-  //   let newUser = 
-  //       {
-  //           username: object.username,
-  //           password: object.password,
-  //           email: object.email,
-  //           first_name: object.first_name,
-  //           last_name: object.last_name,
-
-  //       }
-  //   let response = await axios.post('http://127.0.0.1:8000/api/auth/register/', newUser);
-  //   console.log(response.data)
-  // }
+  
 
   return (
     <div>
@@ -101,7 +85,7 @@ function App() {
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
-        <CommentForm setVideoId={setVideoId} addComment={NewComment}/>
+        <CommentForm video_id={videoId} />
       </Router>
     </div>
   );
