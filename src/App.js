@@ -101,7 +101,7 @@ function App() {
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
-        <CommentForm addComment={NewComment}/>
+        <CommentForm setVideoId={setVideoId} addComment={NewComment}/>
       </Router>
     </div>
   );
