@@ -24,10 +24,13 @@ const CommentForm = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <div>
                 <label>Comment</label>
                 <input type='text' value={text} onChange={(event) => setText(event.target.value)}/>
+                <button onClick={handleSubmit} className="btn" type="submit">
+              Submit
+            </button>
             </div>
         </form>
     )
