@@ -9,6 +9,7 @@ import RelatedVideos from './Components/RelatedVideos/RelatedVideos';
 import NavBar from './Components/NavBar/NavBar';
 import jwt_decode from 'jwt-decode';
 import SearchBar from './Components/SearchBar/SearchBar';
+import CommentForm from './Components/CommentForm/CommentForm';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [description, setDescription] = useState('')
   const [vidSearch, setVidSearch] = useState([])
   const [relatedVids, setRelatedVids] = useState([])
+  const [entries, setEntries] = useState([])
 
   
   const [user, setUser] = useState(null);
@@ -67,6 +69,12 @@ function App() {
     setVideo(response.data.items)
     console.log(response.data.items)
   }
+
+  function NewComment(entry) {
+    let tempComments = [...entries, entry];
+
+    setEntries(tempComments)
+  }
   
   // async function accountCreation(object) {
   //   let newUser = 
@@ -93,6 +101,7 @@ function App() {
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
+        <CommentForm addComment={NewComment}/>
       </Router>
     </div>
   );
