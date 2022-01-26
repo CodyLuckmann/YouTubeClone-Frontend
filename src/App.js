@@ -11,6 +11,8 @@ import jwt_decode from 'jwt-decode';
 import SearchBar from './Components/SearchBar/SearchBar';
 import CommentForm from './Components/CommentForm/CommentForm';
 import CommentList from './Components/CommentList/CommentList';
+import ReplyForm from './Components/ReplyForm/ReplyForm';
+import ReplyList from './Components/ReplyList/ReplyList';
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
   const [vidSearch, setVidSearch] = useState([])
   const [relatedVids, setRelatedVids] = useState([])
   const [comments, setComments] = useState([])
+  const [replies, setReplies] = useState([])
   const [entries,  setEntries] = useState([])
   
 
@@ -85,7 +88,11 @@ function App() {
     console.log(response.data)
   }
   
-  
+  async function getReplies() {
+    let response = await axios.get(`http://127.0.0.1:8000/api/comments/reply/${comments}/`)
+    setReplies(response.data)
+
+  }
 
   return (
     <div>
@@ -100,6 +107,8 @@ function App() {
         </Routes>
         <CommentForm video_id={videoId} addComment={getComments} />
         <CommentList video_id={videoId} comment={comments} />
+        <ReplyForm addReply={getReplies} />
+        <ReplyList comment={replies} />
       </Router>
     </div>
   );
