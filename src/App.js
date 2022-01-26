@@ -16,7 +16,7 @@ import CommentList from './Components/CommentList/CommentList';
 function App() {
 
   const [video, setVideo] = useState([])
-  const [videoId, setVideoId] = useState('')
+  const [videoId, setVideoId] = useState("YQHsXMglC9A")
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [vidSearch, setVidSearch] = useState([])
@@ -80,7 +80,7 @@ function App() {
   }
 
   async function getComments() {
-    let response = await axios.get(`http://127.0.0.1:8000/api/comments/${videoId}`)
+    let response = await axios.get(`http://127.0.0.1:8000/api/comments/comments/${videoId}/`)
     setComments(response.data)
     console.log(response.data)
   }
@@ -98,8 +98,8 @@ function App() {
           <Route path="/Login" element={<LoginForm />}/>
           <Route path="/register" element={<RegistrationForm />}/>
         </Routes>
-        <CommentForm video_id={videoId} addComment={NewComment} />
-        <CommentList comment={entries} />
+        <CommentForm video_id={videoId} addComment={getComments} />
+        <CommentList video_id={videoId} comment={comments} />
       </Router>
     </div>
   );
