@@ -14,7 +14,7 @@ const CommentForm = (props) => {
         e.preventDefault();
         let comment = 
             {
-                
+                video_id: props.video_id,
                 text: text,
 
             }
