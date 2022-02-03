@@ -15,9 +15,9 @@ const ReplyForm = (props) => {
                 comment: props.comment_id
             }
 
+        console.log('this here', reply)
         let response = await axios.post('http://127.0.0.1:8000/api/comments/reply/', reply, {headers: {Authorization: 'Bearer ' + jwt}});
         props.addReply(response, reply)
-        console.log(reply)
     }
 
     return (

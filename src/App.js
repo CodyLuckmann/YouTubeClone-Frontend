@@ -26,9 +26,6 @@ function App() {
   const [comments, setComments] = useState([])
   const [replies, setReplies] = useState([])
   const [entries,  setEntries] = useState([])
-  
-
-  
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -88,8 +85,8 @@ function App() {
     console.log(response.data)
   }
   
-  async function getReplies() {
-    let response = await axios.get(`http://127.0.0.1:8000/api/comments/reply/${comments}/`)
+  async function postReplies() {
+    let response = await axios.post('http://127.0.0.1:8000/api/comments/reply/')
     setReplies(response.data)
 
   }
@@ -107,7 +104,7 @@ function App() {
         </Routes>
         <CommentForm video_id={videoId} addComment={getComments} />
         <CommentList video_id={videoId} comment={comments} />
-        <ReplyForm addReply={getReplies} />
+        <ReplyForm addReply={postReplies} comment_id={comments} />
         <ReplyList comment={replies} />
       </Router>
     </div>

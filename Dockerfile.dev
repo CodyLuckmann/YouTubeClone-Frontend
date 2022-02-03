@@ -1,0 +1,7 @@
+FROM node:latest
+
+WORKDIR /app
+
+COPY package.json ./
+
+CMD [ "npx", "nodemon", "--watch", "src", "--exec", "npm", "start"]
