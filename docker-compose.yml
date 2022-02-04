@@ -3,11 +3,7 @@ version: '3.9'
 services:
   prod:
     container_name: ytc-frontend-prod
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    volumes:
-      - './:/app'
-      - '/app/node_modules'
+    image: cmluckmann/ytc-frontend
+   
     ports:
       - 80:80
