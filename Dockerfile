@@ -1,13 +1,10 @@
-FROM node:latest as build
+FROM node:lts-alpine as build
 
 WORKDIR /app
 
-COPY package.json ./
-COPY package-lock.json ./
+COPY package*.json ./
 
-RUN npm install
-
-RUN npm install react-scripts@4.0.3
+RUN npm ci
 
 COPY . ./
 
